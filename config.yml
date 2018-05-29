@@ -445,25 +445,42 @@ tasks:
 
 ##### Fetch, format and output myanimelist series list to a custom entry list
 #
+#  fill-anime-series-list:
+#    priority: 11
+#    template:
+#      - disable-seen-retry
+#    metainfo_series: yes
+#    list_clear:
+#      what:
+#        - entry_list: myanimelist-series
+#    domain_delay:
+#      myanimelist.net: 5 seconds
+#    myanimelist:
+#      user_id: "{? myanimelist.id ?}"
+#      list: both
+#      type: shows
+#    accept_all: yes
+#    set:
+#      title: "{{myanimelist_name|re_replace('[-/:;.★](?=[a-zA-Z])', ' ')|re_replace('[:;](?![a-zA-Z])|[`´()]|TV|', '')|re_replace('Season ', 'S')|re_replace('  +', ' ')}}"
+#    list_add:
+#      - entry_list: myanimelist-series
+
+#  Using rawlist alternative (ie: raw pastebin url)
   fill-anime-series-list:
-    priority: 11
-    template:
-      - disable-seen-retry
-    metainfo_series: yes
-    list_clear:
-      what:
+      priority: 11
+      template:
+        - disable-seen-retry
+      metainfo_series: yes
+      list_clear:
+        what:
+          - entry_list: myanimelist-series
+      rawlist:
+        list: both
+      accept_all: yes
+      set:
+        title: "{{myanimelist_name|re_replace('[-/:;.★](?=[a-zA-Z])', ' ')|re_replace('[:;](?![a-zA-Z])|[`´()]|TV|', '')|re_replace('Season ', 'S')|re_replace('  +', ' ')}}"
+      list_add:
         - entry_list: myanimelist-series
-    domain_delay:
-      myanimelist.net: 5 seconds
-    myanimelist:
-      user_id: "{? myanimelist.id ?}"
-      list: both
-      type: shows
-    accept_all: yes
-    set:
-      title: "{{myanimelist_name|re_replace('[-/:;.★](?=[a-zA-Z])', ' ')|re_replace('[:;](?![a-zA-Z])|[`´()]|TV|', '')|re_replace('Season ', 'S')|re_replace('  +', ' ')}}"
-    list_add:
-      - entry_list: myanimelist-series
 
 
 ##### Fill the movie queue with movies from trakt list
